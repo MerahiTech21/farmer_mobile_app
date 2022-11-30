@@ -1,8 +1,8 @@
 class ProductType {
   final String image;
   final String name;
-  final double remainQty;
-  final double soldQty;
+  final int remainQty;
+  final int soldQty;
   final DateTime addedDate;
 
   ProductType(
@@ -16,8 +16,8 @@ class ProductType {
     return ProductType(
         image: json["image"],
         name: json["name"],
-        remainQty: json["remainQty"],
-        soldQty: json["soldQty"],
-        addedDate: json["soldQty"]);
+        remainQty: json["remainingQuantity"],
+        soldQty: 8,
+        addedDate: DateTime.now());
   }
 }

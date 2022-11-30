@@ -99,7 +99,7 @@ class SoldProductDetail extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            color: Colors.transparent,
+            color: Colors.white,
             width: double.infinity,
             child: Row(
               children: [

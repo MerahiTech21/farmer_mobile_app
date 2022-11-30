@@ -7,6 +7,7 @@ class TransactionItemCard extends StatelessWidget {
   double soldPrice;
   int soldAmount;
   String date;
+  String image;
 
   TransactionItemCard({
     required this.productName,
@@ -14,6 +15,7 @@ class TransactionItemCard extends StatelessWidget {
     required this.soldAmount,
     required this.soldPrice,
     required this.date,
+    required this.image,
     Key? key,
   }) : super(key: key);
 
@@ -27,10 +29,10 @@ class TransactionItemCard extends StatelessWidget {
           productName.capitalize(),
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        leading: Image.asset("assets/images/download_5.jpg"),
+        leading: Image.network(image),
         subtitle: Text(
           "Price Birr $soldPrice",
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 14),
         ),
         trailing: Column(
           crossAxisAlignment: CrossAxisAlignment.end,

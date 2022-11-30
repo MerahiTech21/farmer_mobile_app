@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ProduceTypeCard extends StatelessWidget {
   final String image;
   final String name;
-  final double remainQty;
-  final double soldQty;
+  final int remainQty;
+  final int soldQty;
   final DateTime addedDate;
 
   const ProduceTypeCard({
@@ -26,7 +26,10 @@ class ProduceTypeCard extends StatelessWidget {
       child: ListTile(
         isThreeLine: true,
         leading: ClipRRect(
-          child: Image.asset(image),
+          child: Image.network(
+            image,
+            fit: BoxFit.fill,
+          ),
           borderRadius: BorderRadius.circular(5),
         ),
         title: Text(

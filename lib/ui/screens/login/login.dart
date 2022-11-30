@@ -119,7 +119,7 @@ class _LoginState extends State<Login> {
                       obscureText: !_isPasswordShown,
                       // style: const TextStyle(color: Colors.black),
                       controller: _ctrlPassword,
-                      keyboardType: TextInputType.number,
+                      // keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value == null || value.isEmpty) {

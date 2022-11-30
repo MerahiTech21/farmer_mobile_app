@@ -45,7 +45,7 @@ class WithdrawPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: size.height * 0.3,
+                          height: size.height * 0.2,
                           child: Center(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,

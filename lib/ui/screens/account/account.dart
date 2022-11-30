@@ -17,36 +17,113 @@ class _AccountState extends State<Account> {
   final TextEditingController _newPassword = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  String? name;
+  String? fname;
+  String? lname;
   String? phoneNo;
+  String? sex;
   String? userId;
   bool _isLoading = false;
   String _error = "";
+  bool _isPhoneNoChanging = false;
+  bool _isPasswordChanging = false;
   @override
   void initState() {
-    getUserData();
     super.initState();
+    _getUserData();
   }
 
-  void getUserData() async {
+  void _changePhoneNo() async {
     try {
-      _isLoading = true;
+      var res = await changePhoneNo(_phoneNoCtrl.text);
+      setState(() {
+        _isPhoneNoChanging = true;
+        phoneNo = res;
+      });
+      const snackBar = SnackBar(
+        backgroundColor: Colors.white,
+        content: Text(
+          'Your Phone Number is changed.',
+          style: TextStyle(color: Colors.red),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (e) {
+      const snackBar = SnackBar(
+        backgroundColor: Colors.white,
+        content: Text('Faild to change Phone Number.',
+            style: TextStyle(color: Colors.red)),
+      );
+      _phoneNoCtrl.text = '';
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } finally {
+      setState(() {
+        _isPhoneNoChanging = false;
+      });
+      Navigator.pop(context);
+    }
+  }
+
+  void _changePassword() async {
+    try {
+      var res = await changePassword(
+          newPassword: _newPassword.text, oldPassword: _oldPassword.text);
+      setState(() {
+        _isPasswordChanging = true;
+      });
+      const snackBar = SnackBar(
+        backgroundColor: Colors.white,
+        content: Text(
+          'Your Password is changed.',
+          style: TextStyle(color: Colors.red),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (e) {
+      const snackBar = SnackBar(
+        backgroundColor: Colors.white,
+        content: Text('Faild to change Password.',
+            style: TextStyle(color: Colors.red)),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } finally {
+      _newPassword.text = "";
+      _oldPassword.text = "";
+      setState(() {
+        _isPasswordChanging = false;
+      });
+      Navigator.pop(context);
+    }
+  }
+
+  void _getUserData() async {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+
       Map<String, dynamic> response = await fetchUserInfo();
-      name = response[""];
-      phoneNo = response[""];
+
+      fname = response['fName'];
+      lname = response['lName'];
+
+      print('🙌');
+      print(fname);
+      phoneNo = response["phoneNumber"];
+      sex = response["sex"];
       userId = response["id"];
     } catch (e) {
       _error = e.toString();
     } finally {
-      _isLoading = false;
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
   logoutUser() async {
-    await logout();
-
     Navigator.of(context).pushNamedAndRemoveUntil(
         Login.routeName, (Route<dynamic> route) => false);
+    await logout();
   }
 
   _showChangePasswordDialog() {
@@ -134,8 +211,12 @@ class _AccountState extends State<Account> {
                             },
                           ),
                           ElevatedButton(
-                            onPressed: () {},
-                            child: const Text("Change"),
+                            onPressed: () {
+                              _changePassword();
+                            },
+                            child: _isPasswordChanging
+                                ? const CircularProgressIndicator()
+                                : const Text("Change"),
                             style: ElevatedButton.styleFrom(
                                 primary: kPrimaryColor,
                                 shape: RoundedRectangleBorder(
@@ -186,6 +267,7 @@ class _AccountState extends State<Account> {
                         controller: _phoneNoCtrl,
                         style: const TextStyle(fontSize: 16),
                         decoration: InputDecoration(
+                            hintText: phoneNo ?? '',
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 0),
                             border: OutlineInputBorder(
@@ -216,11 +298,11 @@ class _AccountState extends State<Account> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                name = "Here wergo";
-                              });
+                              _changePhoneNo();
                             },
-                            child: const Text("Change"),
+                            child: _isPhoneNoChanging
+                                ? const CircularProgressIndicator()
+                                : const Text("Change"),
                             style: ElevatedButton.styleFrom(
                                 primary: kPrimaryColor,
                                 shape: RoundedRectangleBorder(
@@ -311,7 +393,7 @@ class _AccountState extends State<Account> {
             onPressed: () => {Navigator.pop(context)},
           ),
         ),
-        body: _isLoading
+        body: !_isLoading
             ? SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -319,13 +401,13 @@ class _AccountState extends State<Account> {
                     SizedBox(
                       height: size.height * .05,
                     ),
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 50,
                       backgroundColor: kPrimaryColor,
                       child: Text(
-                        // auth.firstName?.substring(0, 1).toUpperCase() ?? '',
-                        'B',
-                        style: TextStyle(
+                        fname?.substring(0, 1).toUpperCase() ?? '',
+                        // 'A',
+                        style: const TextStyle(
                             fontSize: 25,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
@@ -334,8 +416,9 @@ class _AccountState extends State<Account> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      'Betelot Temesgen',
+                    Text(
+                      '$fname $lname',
+                      // 'Alemayeh Moges',
                       textAlign: TextAlign.center,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),

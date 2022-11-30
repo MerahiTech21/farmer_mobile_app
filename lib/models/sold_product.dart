@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class SoldProduct {
   String productName;
   String typeName;
@@ -9,11 +7,13 @@ class SoldProduct {
   double rentCost;
   DateTime date;
   double netBalance;
+  String image;
 
   SoldProduct(
       {required this.productName,
       required this.typeName,
       this.quality,
+      required this.image,
       required this.soldAmount,
       required this.soldPrice,
       required this.rentCost,
@@ -22,8 +22,9 @@ class SoldProduct {
 
   factory SoldProduct.fromJson(Map<String, dynamic> json) {
     return SoldProduct(
-        productName:  json['productName'],
+        productName: json['productName'],
         typeName: json['typeName'],
+        image: json["image"],
         soldAmount: json['soldAmount'],
         soldPrice: json['soldPrice'].toDouble(),
         rentCost: json['rentCost'],

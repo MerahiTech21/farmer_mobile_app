@@ -30,71 +30,83 @@ class SoldProduce extends StatelessWidget {
                     snapshot.data as List<SoldProduct>;
 
                 double totalSold = soldProducts.fold(
-                    0, (total, item) => total += item.soldAmount);
+                    0, (total, item) => total += item.soldPrice);
 
-                return SingleChildScrollView(
-                  physics: const ScrollPhysics(),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: size.height * 0.3,
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Countup(
-                                  begin: 0,
-                                  end: totalSold.toDouble(),
-                                  duration: const Duration(seconds: 2),
-                                  separator: ',',
-                                  prefix: 'Birr ',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 24),
+                return soldProducts.isEmpty
+                    ? const Center(
+                        child: Text("No sold produce yet!"),
+                      )
+                    : SingleChildScrollView(
+                        physics: const ScrollPhysics(),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.2,
+                                child: Center(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Countup(
+                                        begin: 0,
+                                        end: totalSold.toDouble(),
+                                        duration: const Duration(seconds: 2),
+                                        separator: ',',
+                                        prefix: 'Birr ',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 24),
+                                      ),
+                                      const Text(
+                                        "Total sold",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color:
+                                                Color.fromRGBO(0, 0, 0, 0.5)),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                const Text(
-                                  "Total sold",
-                                ),
-                              ],
-                            ),
+                              ),
+                              const Text(
+                                "Transactions",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: soldProducts.length,
+                                  itemBuilder: (c, index) => GestureDetector(
+                                        onTap: () => {
+                                          Navigator.pushNamed(context,
+                                              SoldProductDetail.routeName,
+                                              arguments: soldProducts[index])
+                                        },
+                                        child: TransactionItemCard(
+                                            productName:
+                                                soldProducts[index].productName,
+                                            typeName:
+                                                soldProducts[index].typeName,
+                                            soldPrice:
+                                                soldProducts[index].soldPrice,
+                                            image: soldProducts[index].image,
+                                            soldAmount:
+                                                soldProducts[index].soldAmount,
+                                            date:
+                                                '${soldProducts[index].date.day}/${soldProducts[index].date.month}/${soldProducts[index].date.year}'),
+                                      ))
+                            ],
                           ),
                         ),
-                        const Text(
-                          "Transactions",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: soldProducts.length,
-                            itemBuilder: (c, index) => GestureDetector(
-                                  onTap: () => {
-                                    Navigator.pushNamed(
-                                        context, SoldProductDetail.routeName,
-                                        arguments: soldProducts[index])
-                                  },
-                                  child: TransactionItemCard(
-                                      productName:
-                                          soldProducts[index].productName,
-                                      typeName: soldProducts[index].typeName,
-                                      soldPrice: soldProducts[index].soldPrice,
-                                      soldAmount:
-                                          soldProducts[index].soldAmount,
-                                      date:
-                                          '${soldProducts[index].date.day}/${soldProducts[index].date.month}/${soldProducts[index].date.year}'),
-                                ))
-                      ],
-                    ),
-                  ),
-                );
+                      );
               }
             }
             return const Center(
