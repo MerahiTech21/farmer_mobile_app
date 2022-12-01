@@ -1,6 +1,7 @@
 import 'package:coldroom_product_management/controller/sold_product_controller.dart';
 import 'package:coldroom_product_management/models/sold_product.dart';
 import 'package:coldroom_product_management/ui/screens/sold_produce/sold_product_detail.dart';
+import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 
@@ -110,7 +111,7 @@ class SoldProduce extends StatelessWidget {
               }
             }
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(color: kPrimaryColor),
             );
           }),
     );

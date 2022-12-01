@@ -1,6 +1,7 @@
 import 'package:coldroom_product_management/controller/product_controller.dart';
 import 'package:coldroom_product_management/models/product_type.dart';
 import 'package:coldroom_product_management/ui/screens/my_produce/components/product_type_card.dart';
+import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class ProductTypeScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class ProductTypeScreen extends StatelessWidget {
     int productId = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product types'),
+        title: const Text('Product Types'),
       ),
       body: FutureBuilder(
           future: fetchProductTypes(productId),
@@ -36,7 +37,7 @@ class ProductTypeScreen extends StatelessWidget {
               }
             }
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(color: kPrimaryColor),
             );
           }),
     );

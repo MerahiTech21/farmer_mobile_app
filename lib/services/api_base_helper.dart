@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'api_exception.dart';
 
 class ApiBaseHelper {
-  final String _baseUrl = "http://197.156.77.208:3000";
+  final String _baseUrl = "http://192.168.100.232:3000";
   Future<dynamic> get({required String url, token}) async {
     final responseJson;
     try {
@@ -33,6 +33,23 @@ class ApiBaseHelper {
             'Accept': 'application/json',
             'Authorization': 'Bearer $token',
           });
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw FetchDataException(message: 'No Internet connection');
+    }
+
+    return responseJson;
+  }
+
+  Future<dynamic> put({required String url, required payload, token}) async {
+    final responseJson;
+    try {
+      final http.Response response = await http
+          .put(Uri.parse(_baseUrl + url), body: json.encode(payload), headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
       responseJson = _returnResponse(response);
     } on SocketException {
       throw FetchDataException(message: 'No Internet connection');

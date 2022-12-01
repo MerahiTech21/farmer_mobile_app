@@ -26,30 +26,26 @@ Future logout() async {
   await apiBaseHelper.get(url: '/farmer/auth/logout');
 }
 
-Future changePhoneNo(phoneNumber) async {
-  var id = await StorageManager.readData("userId");
-  var token = await StorageManager.readData("token");
+// Future changePhoneNo(phoneNumber) async {
+//   var id = await StorageManager.readData("userId");
+//   var token = await StorageManager.readData("token");
  
-  final response = await apiBaseHelper.post(
-      url: '/farmer/farmerProfile/phoneNumber/${id}',
-      payload: {phoneNumber},
-      token: token);
+//   final response = await apiBaseHelper.post(
+//       url: '/farmer/farmerProfile/phoneNumber/${id}',
+//       payload: {phoneNumber},
+//       token: token);
 
- 
-  print(response);
-  return response;
-}
+//   return response;
+// }
 
 Future changePassword({oldPassword, newPassword}) async {
   var id = await StorageManager.readData("userId");
   var token = await StorageManager.readData("token");
  
-  final response = await apiBaseHelper.post(
+  final response = await apiBaseHelper.put(
       url: '/farmer/farmerProfile/password/${id}',
-      payload: {oldPassword, newPassword},
+      payload: {"oldPassword":oldPassword, 'newPassword':newPassword},
       token: token);
 
- 
-  print(response);
-  return response;
+   return response;
 }

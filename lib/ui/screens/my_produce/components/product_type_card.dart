@@ -1,3 +1,4 @@
+import 'package:coldroom_product_management/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 class ProduceTypeCard extends StatelessWidget {
@@ -19,7 +20,7 @@ class ProduceTypeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
       padding: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(5)),
@@ -28,20 +29,32 @@ class ProduceTypeCard extends StatelessWidget {
         leading: ClipRRect(
           child: Image.network(
             image,
-            fit: BoxFit.fill,
+            width: 80,
+            fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(5),
         ),
         title: Text(
-          name,
+          name.capitalize(),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text("Remain $remainQty Kg "), Text("Sold $soldQty Kg")],
+          children: [
+            Text(
+              "Remain $remainQty Kg ",
+              style: const TextStyle(fontSize: 14),
+            ),
+            Text(
+              "Sold $soldQty Kg",
+              style: const TextStyle(fontSize: 14),
+            )
+          ],
         ),
-        trailing:
-            Text("${addedDate.day} /${addedDate.month}/${addedDate.year}"),
+        trailing: Text(
+          "${addedDate.day} /${addedDate.month}/${addedDate.year}",
+          style: const TextStyle(fontSize: 14),
+        ),
       ),
     );
   }

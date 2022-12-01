@@ -14,7 +14,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       child: ListTile(
         onTap: () {
           print("product id😊");
@@ -32,14 +32,21 @@ class ProductCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             child: Image.network(
               myProduct.image,
+              width: 80,
               fit: BoxFit.cover,
             )),
         title: Text(
           myProduct.name.capitalize(),
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
-        subtitle: Text('Rent Birr ${myProduct.rentPrice}'),
-        trailing: Text("${myProduct.remainingQty} Kg"),
+        subtitle: Text(
+          'Rent Birr ${myProduct.rentPrice}',
+          style: TextStyle(fontSize: 14, color: Colors.black.withOpacity(0.5)),
+        ),
+        trailing: Text(
+          "${myProduct.remainingQty} Kg",
+          style: const TextStyle(fontSize: 14),
+        ),
 
         // expandedCrossAxisAlignment: CrossAxisAlignment.start,
         // children: <Widget>[

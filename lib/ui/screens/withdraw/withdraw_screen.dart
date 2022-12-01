@@ -1,5 +1,6 @@
 import 'package:coldroom_product_management/controller/withdraw_controller.dart';
 import 'package:coldroom_product_management/models/withdraw.dart';
+import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'components.dart/withdraw_item_card.dart';
@@ -34,6 +35,11 @@ class WithdrawPage extends StatelessWidget {
                 return const Center(child: Text('Faild to load data'));
               } else if (snapshot.hasData) {
                 List<Withdraw> withdraws = snapshot.data as List<Withdraw>;
+                if (withdraws.isEmpty) {
+                  return const Center(
+                    child: Text('No withdrawal yet!'),
+                  );
+                }
                 int totalWithdraw = withdraws
                     .map((item) => item.balance)
                     .reduce((sum, item) => sum + item);
@@ -93,7 +99,7 @@ class WithdrawPage extends StatelessWidget {
               }
             }
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(color: kPrimaryColor),
             );
           }),
     );

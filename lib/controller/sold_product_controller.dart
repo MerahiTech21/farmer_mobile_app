@@ -12,7 +12,7 @@ Future<List<SoldProduct>> fetchSoldProducts() async {
   
   List<SoldProduct> withdraws = [];
   final response =
-      await apiBaseHelper.get(url: '/farmer/farmerHome/soldProduct/2');
+      await apiBaseHelper.get(url: '/farmer/farmerHome/soldProduct/$id');
   List soldProductResponse = response as List;
   for (int i = 0; i < soldProductResponse.length; i++) {
     Map<String, dynamic> map = soldProductResponse[i];

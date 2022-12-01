@@ -5,7 +5,7 @@ class Product {
   String image;
   String name;
   double remainingQty;
-  double rentPrice;
+  int rentPrice;
   List<ProductType>? types = [];
   Product(
       {required this.image,

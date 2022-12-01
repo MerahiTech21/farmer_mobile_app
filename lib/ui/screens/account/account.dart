@@ -1,7 +1,9 @@
 import 'package:coldroom_product_management/controller/auth.dart';
 import 'package:coldroom_product_management/ui/screens/login/login.dart';
 import 'package:coldroom_product_management/utils/constants.dart';
+import 'package:coldroom_product_management/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Account extends StatefulWidget {
   static const String routeName = '/account';
@@ -32,36 +34,36 @@ class _AccountState extends State<Account> {
     _getUserData();
   }
 
-  void _changePhoneNo() async {
-    try {
-      var res = await changePhoneNo(_phoneNoCtrl.text);
-      setState(() {
-        _isPhoneNoChanging = true;
-        phoneNo = res;
-      });
-      const snackBar = SnackBar(
-        backgroundColor: Colors.white,
-        content: Text(
-          'Your Phone Number is changed.',
-          style: TextStyle(color: Colors.red),
-        ),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } catch (e) {
-      const snackBar = SnackBar(
-        backgroundColor: Colors.white,
-        content: Text('Faild to change Phone Number.',
-            style: TextStyle(color: Colors.red)),
-      );
-      _phoneNoCtrl.text = '';
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } finally {
-      setState(() {
-        _isPhoneNoChanging = false;
-      });
-      Navigator.pop(context);
-    }
-  }
+  // void _changePhoneNo() async {
+  //   try {
+  //     var res = await changePhoneNo(_phoneNoCtrl.text);
+  //     setState(() {
+  //       _isPhoneNoChanging = true;
+  //       phoneNo = res;
+  //     });
+  //     const snackBar = SnackBar(
+  //       backgroundColor: Colors.white,
+  //       content: Text(
+  //         'Your Phone Number is changed.',
+  //         style: TextStyle(color: Colors.red),
+  //       ),
+  //     );
+  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //   } catch (e) {
+  //     const snackBar = SnackBar(
+  //       backgroundColor: Colors.white,
+  //       content: Text('Faild to change Phone Number.',
+  //           style: TextStyle(color: Colors.red)),
+  //     );
+  //     _phoneNoCtrl.text = '';
+  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //   } finally {
+  //     setState(() {
+  //       _isPhoneNoChanging = false;
+  //     });
+  //     Navigator.pop(context);
+  //   }
+  // }
 
   void _changePassword() async {
     try {
@@ -74,17 +76,18 @@ class _AccountState extends State<Account> {
         backgroundColor: Colors.white,
         content: Text(
           'Your Password is changed.',
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.green),
         ),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } catch (e) {
-      const snackBar = SnackBar(
+      var snackBar = SnackBar(
         backgroundColor: Colors.white,
-        content: Text('Faild to change Password.',
-            style: TextStyle(color: Colors.red)),
+        content: Text(e.toString(), style: const TextStyle(color: Colors.red)),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      print("😉😉");
+      print(e);
     } finally {
       _newPassword.text = "";
       _oldPassword.text = "";
@@ -233,91 +236,88 @@ class _AccountState extends State<Account> {
     );
   }
 
-  _showPhoneNoDialog() {
-    // _phoneNo.text = auth.firstName;
-    // _lastNameCtrl.text = auth.lastName;
-
-    showDialog<String>(
-      context: context,
-      builder: (BuildContext context) => Dialog(
-        insetPadding: const EdgeInsets.all(kDefaultPadding * 0.5),
-        child: Container(
-          width: double.infinity,
-          height: 200,
-          decoration: BoxDecoration(
-            // color: isDark ? kDarkBlueColor : Colors.white,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-          child: Column(
-            children: [
-              Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text('New Phone No'),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: _phoneNoCtrl,
-                        style: const TextStyle(fontSize: 16),
-                        decoration: InputDecoration(
-                            hintText: phoneNo ?? '',
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 0),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Phone is required';
-                          } else if (value.length > 10) {
-                            return "Shouldn't be greater than 10";
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            child: const Text(
-                              "Cancel",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              _changePhoneNo();
-                            },
-                            child: _isPhoneNoChanging
-                                ? const CircularProgressIndicator()
-                                : const Text("Change"),
-                            style: ElevatedButton.styleFrom(
-                                primary: kPrimaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25))),
-                          )
-                        ],
-                      )
-                    ],
-                  ))
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  // _showPhoneNoDialog() {
+  //   showDialog<String>(
+  //     context: context,
+  //     builder: (BuildContext context) => Dialog(
+  //       insetPadding: const EdgeInsets.all(kDefaultPadding * 0.5),
+  //       child: Container(
+  //         width: double.infinity,
+  //         height: 200,
+  //         decoration: BoxDecoration(
+  //           // color: isDark ? kDarkBlueColor : Colors.white,
+  //           borderRadius: BorderRadius.circular(15),
+  //         ),
+  //         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+  //         child: Column(
+  //           children: [
+  //             Form(
+  //                 key: _formKey,
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   children: [
+  //                     const SizedBox(
+  //                       height: 10,
+  //                     ),
+  //                     const Text('New Phone No'),
+  //                     const SizedBox(
+  //                       height: 5,
+  //                     ),
+  //                     TextFormField(
+  //                       controller: _phoneNoCtrl,
+  //                       style: const TextStyle(fontSize: 16),
+  //                       decoration: InputDecoration(
+  //                           hintText: phoneNo ?? '',
+  //                           contentPadding: const EdgeInsets.symmetric(
+  //                               horizontal: 16, vertical: 0),
+  //                           border: OutlineInputBorder(
+  //                               borderRadius: BorderRadius.circular(25))),
+  //                       validator: (value) {
+  //                         if (value == null || value.isEmpty) {
+  //                           return 'Phone is required';
+  //                         } else if (value.length > 10) {
+  //                           return "Shouldn't be greater than 10";
+  //                         }
+  //                         return null;
+  //                       },
+  //                     ),
+  //                     const SizedBox(
+  //                       height: 20,
+  //                     ),
+  //                     Row(
+  //                       mainAxisAlignment: MainAxisAlignment.end,
+  //                       children: [
+  //                         TextButton(
+  //                           child: const Text(
+  //                             "Cancel",
+  //                             style: TextStyle(color: Colors.black),
+  //                           ),
+  //                           onPressed: () {
+  //                             Navigator.pop(context);
+  //                           },
+  //                         ),
+  //                         ElevatedButton(
+  //                           onPressed: () {
+  //                             _changePhoneNo();
+  //                           },
+  //                           child: _isPhoneNoChanging
+  //                               ? const CircularProgressIndicator()
+  //                               : const Text("Change"),
+  //                           style: ElevatedButton.styleFrom(
+  //                               primary: kPrimaryColor,
+  //                               shape: RoundedRectangleBorder(
+  //                                   borderRadius: BorderRadius.circular(25))),
+  //                         )
+  //                       ],
+  //                     )
+  //                   ],
+  //                 ))
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Future<void> _showAboutDialog() async {
     return showDialog<void>(
@@ -328,8 +328,13 @@ class _AccountState extends State<Account> {
           title: const Text('About'),
           content: SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
-                Text('Tell about rensys engineering more '),
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/rensys.png',
+                  height: 100,
+                ),
+                const Text(
+                    "Rensys Engineering & Trading PLC is an energy solution company based in Addis Ababa.  It was established with the aim of playing its role in providing renewable energy solutions for energy-deprived communities. Since its establishment, the company has electrified millions of lives through SHS, solar mini-grid, and solar lanterns."),
               ],
             ),
           ),
@@ -359,7 +364,32 @@ class _AccountState extends State<Account> {
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
-                Text('Tell more about rensys address'),
+                //  |  (Toll Free) info@rensysengineering.com
+                ListTile(
+                  leading: Icon(Icons.call),
+                  // title: Text('Phone No'),
+                  title: Text("+251 952 494949"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.call),
+                  // title: Text('Phone No'),
+                  title: Text("+251 116 620372"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.call),
+                  // title: Text('Phone No'),
+                  title: Text("+251 11 6 620529"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.phone),
+                  // title: Text('Toll Free'),
+                  title: Text("8544"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.email),
+                  // title: Text('Phone No'),
+                  title: Text('info@rensysengineering.com'),
+                ),
               ],
             ),
           ),
@@ -417,17 +447,24 @@ class _AccountState extends State<Account> {
                       height: 10,
                     ),
                     Text(
-                      '$fname $lname',
+                      '${fname!.capitalize()} ${lname!.capitalize()}',
                       // 'Alemayeh Moges',
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    buildCard(
-                        title: "Change Phone No", onPress: _showPhoneNoDialog),
+                    Card(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 2),
+                      child: ListTile(
+                        trailing: const Icon(Icons.call),
+                        title: Text("$phoneNo"),
+                        // trailing: const Icon(Icons.arrow_forward_ios),
+                      ),
+                    ),
                     buildCard(
                         title: "Change Password",
                         onPress: _showChangePasswordDialog),

@@ -10,7 +10,7 @@ Future<List<Product>> fetchProducts() async {
   var token = await StorageManager.readData("token");
   List<Product> products = [];
   final response = await apiBaseHelper.get(
-      url: '/farmer/farmerHome/farmerProduct/1', token: token);
+      url: '/farmer/farmerHome/farmerProduct/$id', token: token);
   List productResponse = response as List;
   for (int i = 0; i < productResponse.length; i++) {
     Map<String, dynamic> map = productResponse[i];

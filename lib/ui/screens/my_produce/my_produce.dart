@@ -1,8 +1,7 @@
 import 'package:coldroom_product_management/controller/product_controller.dart';
 import 'package:coldroom_product_management/models/product.dart';
-import 'package:coldroom_product_management/ui/screens/my_produce/product_type.dart';
+import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:skeleton_text/skeleton_text.dart';
 import 'components/product.dart';
 
 class MyProduce extends StatelessWidget {
@@ -28,13 +27,14 @@ class MyProduce extends StatelessWidget {
                 List<Product> myProducts = snapshoot.data as List<Product>;
                 return ListView.builder(
                     itemCount: myProducts.length,
+                    // physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return ProductCard(myProduct: myProducts[index]);
                     });
               }
             }
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(color: kPrimaryColor),
             );
           })
       // ListView.builder(
