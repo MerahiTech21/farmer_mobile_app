@@ -17,8 +17,6 @@ class ProductCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       child: ListTile(
         onTap: () {
-          print("product id😊");
-          print(myProduct.id);
           Navigator.pushNamed(context, ProductTypeScreen.routeName,
               arguments: myProduct.id);
         },

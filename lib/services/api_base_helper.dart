@@ -15,6 +15,7 @@ class ApiBaseHelper {
         'Authorization': 'Bearer $token',
         'Retry-After': '3600'
       });
+
       responseJson = _returnResponse(response);
     } on SocketException {
       throw FetchDataException(message: 'No Internet connection');

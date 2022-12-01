@@ -51,9 +51,14 @@ class ProduceTypeCard extends StatelessWidget {
             )
           ],
         ),
-        trailing: Text(
-          "${addedDate.day} /${addedDate.month}/${addedDate.year}",
-          style: const TextStyle(fontSize: 14),
+        trailing: Column(
+          children: [
+            const Spacer(),
+            Text(
+              "${addedDate.day} /${addedDate.month}/${addedDate.year}",
+              style: const TextStyle(fontSize: 14),
+            ),
+          ],
         ),
       ),
     );

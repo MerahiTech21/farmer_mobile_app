@@ -7,13 +7,15 @@ import 'package:coldroom_product_management/services/storage_management.dart';
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 
 Future<List<SoldProduct>> fetchSoldProducts() async {
-  var token = StorageManager.readData("token");
-  var id = StorageManager.readData('userId');
-  
+  var token = await StorageManager.readData("token");
+  var id = await StorageManager.readData('userId');
+
   List<SoldProduct> withdraws = [];
   final response =
       await apiBaseHelper.get(url: '/farmer/farmerHome/soldProduct/$id');
   List soldProductResponse = response as List;
+  print(("response 🙌 sold"));
+  print(id);
   for (int i = 0; i < soldProductResponse.length; i++) {
     Map<String, dynamic> map = soldProductResponse[i];
     withdraws.add(SoldProduct.fromJson(map));

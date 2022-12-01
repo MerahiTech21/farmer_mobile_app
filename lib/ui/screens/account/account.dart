@@ -331,10 +331,10 @@ class _AccountState extends State<Account> {
               children: <Widget>[
                 Image.asset(
                   'assets/images/rensys.png',
-                  height: 100,
+                  height: 120,
                 ),
                 const Text(
-                    "Rensys Engineering & Trading PLC is an energy solution company based in Addis Ababa.  It was established with the aim of playing its role in providing renewable energy solutions for energy-deprived communities. Since its establishment, the company has electrified millions of lives through SHS, solar mini-grid, and solar lanterns."),
+                    "Rensys Engineering & Trading PLC is an energy solution company based in Addis Ababa.  It was established with the aim of playing its role in providing renewable energy solutions for energy-deprived communities. Since its establishment, the company has electrified millions of lives through SHS, solar mini-grid, and solar lanterns.\n\nAs energy is an enabler for socio-economic development, we give emphasis to the Productive Use of Energy. "),
               ],
             ),
           ),
@@ -366,6 +366,11 @@ class _AccountState extends State<Account> {
               children: const <Widget>[
                 //  |  (Toll Free) info@rensysengineering.com
                 ListTile(
+                  leading: Icon(Icons.phone),
+                  // title: Text('Toll Free'),
+                  title: Text("8544   (Toll Free)"),
+                ),
+                ListTile(
                   leading: Icon(Icons.call),
                   // title: Text('Phone No'),
                   title: Text("+251 952 494949"),
@@ -380,11 +385,7 @@ class _AccountState extends State<Account> {
                   // title: Text('Phone No'),
                   title: Text("+251 11 6 620529"),
                 ),
-                ListTile(
-                  leading: Icon(Icons.phone),
-                  // title: Text('Toll Free'),
-                  title: Text("8544"),
-                ),
+
                 ListTile(
                   leading: Icon(Icons.email),
                   // title: Text('Phone No'),
@@ -475,7 +476,9 @@ class _AccountState extends State<Account> {
                 ),
               )
             : const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: kPrimaryColor,
+                ),
               ),
       ),
     );

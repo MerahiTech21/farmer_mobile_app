@@ -22,14 +22,18 @@ class TransactionItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
       child: ListTile(
         // isThreeLine: true,
         title: Text(
           productName.capitalize(),
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        leading: Image.network(image),
+        leading: Image.network(
+          image,
+          width: 80,
+          fit: BoxFit.cover,
+        ),
         subtitle: Text(
           "Price Birr $soldPrice",
           style: const TextStyle(fontSize: 14),

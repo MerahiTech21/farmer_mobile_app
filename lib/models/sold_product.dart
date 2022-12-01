@@ -4,9 +4,9 @@ class SoldProduct {
   String? quality;
   int soldAmount;
   double soldPrice;
-  double rentCost;
+  int rentCost;
   DateTime date;
-  double netBalance;
+  int netBalance;
   String image;
 
   SoldProduct(
