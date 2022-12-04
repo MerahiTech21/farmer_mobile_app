@@ -419,7 +419,8 @@ class _AccountState extends State<Account> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back_ios,
+                color: kPrimaryColor, size: 25),
             color: Colors.black,
             onPressed: () => {Navigator.pop(context)},
           ),
@@ -430,14 +431,13 @@ class _AccountState extends State<Account> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(
-                      height: size.height * .05,
+                      height: size.height * .04,
                     ),
                     CircleAvatar(
                       radius: 50,
                       backgroundColor: kPrimaryColor,
                       child: Text(
                         fname?.substring(0, 1).toUpperCase() ?? '',
-                        // 'A',
                         style: const TextStyle(
                             fontSize: 25,
                             color: Colors.white,
@@ -449,7 +449,6 @@ class _AccountState extends State<Account> {
                     ),
                     Text(
                       '${fname!.capitalize()} ${lname!.capitalize()}',
-                      // 'Alemayeh Moges',
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 18),
@@ -461,7 +460,10 @@ class _AccountState extends State<Account> {
                       margin: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 2),
                       child: ListTile(
-                        trailing: const Icon(Icons.call),
+                        trailing: const Icon(
+                          Icons.call,
+                          color: kPrimaryColor,
+                        ),
                         title: Text("$phoneNo"),
                         // trailing: const Icon(Icons.arrow_forward_ios),
                       ),
@@ -491,7 +493,10 @@ class _AccountState extends State<Account> {
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
         child: ListTile(
           title: Text(title),
-          trailing: const Icon(Icons.arrow_forward_ios),
+          trailing: const Icon(
+            Icons.arrow_forward_ios,
+            color: kPrimaryColor,
+          ),
         ),
       ),
     );

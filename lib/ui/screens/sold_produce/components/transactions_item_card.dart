@@ -27,7 +27,7 @@ class TransactionItemCard extends StatelessWidget {
         // isThreeLine: true,
         title: Text(
           productName.capitalize(),
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         leading: Image.network(
           image,
@@ -42,11 +42,13 @@ class TransactionItemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              "$soldAmount Kg",
-              style: const TextStyle(fontSize: 14),
+              "$soldAmount KG",
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             const Spacer(),
-            Text(date, style: const TextStyle(fontSize: 14))
+            Text(date,
+                style: TextStyle(
+                    fontSize: 14, color: Colors.black.withOpacity(0.8)))
           ],
         ),
       ),

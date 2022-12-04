@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'api_exception.dart';
 
 class ApiBaseHelper {
-  final String _baseUrl = "http://192.168.100.232:3000";
+  final String _baseUrl = "http://192.168.0.9:3000";
   Future<dynamic> get({required String url, token}) async {
     final responseJson;
     try {

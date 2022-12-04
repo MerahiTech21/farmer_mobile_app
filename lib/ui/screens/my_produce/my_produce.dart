@@ -13,9 +13,6 @@ class MyProduce extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Produce"),
-      ),
       body: FutureBuilder(
           future: fetchProducts(),
           builder: (context, snapshoot) {
@@ -34,54 +31,114 @@ class MyProduce extends StatelessWidget {
                   child: Column(
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: size.height * 0.2,
-                        child: Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Countup(
-                                begin: 0,
-                                end: totalProduce,
-                                duration: const Duration(seconds: 2),
-                                separator: ',',
-                                suffix: ' Kg',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w800, fontSize: 24),
-                              ),
-                              const Text(
-                                "Total Produce",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color.fromRGBO(0, 0, 0, 0.5)),
-                              ),
-                            ],
+                      AppBar(
+                        leading: IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon:
+                                const Icon(Icons.arrow_back_ios_new_outlined)),
+                        title: const Text(
+                          "My Produce",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
+                        elevation: 0,
                       ),
-                      const Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            "My Produce",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
+
+                      Stack(
+                        children: [
+                          Container(
+                            height: size.height * 0.2,
+                            padding: const EdgeInsets.only(bottom: 40),
+                            decoration: const BoxDecoration(
+                              color: kPrimaryColor,
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15)),
+                            ),
+                            child: Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Countup(
+                                    begin: 0,
+                                    end: totalProduce,
+                                    duration: const Duration(seconds: 2),
+                                    separator: ',',
+                                    suffix: ' KG',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        color: Colors.white,
+                                        fontSize: 24),
+                                  ),
+                                  const Text(
+                                    "Total Produce",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color:
+                                            Color.fromRGBO(255, 255, 255, 0.8)),
+                                  ),
+                                ],
+                              ), 
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: size.height * 0.2 - 60, right: 5, left: 5),
+                            child: ListView.builder(
+                                itemCount: myProducts.length,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return ProductCard(
+                                      myProduct: myProducts[index]);
+                                }),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      ListView.builder(
-                          itemCount: myProducts.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return ProductCard(myProduct: myProducts[index]);
-                          }),
+                      // const Align(
+                      //   alignment: Alignment.topLeft,
+                      //   child: Padding(
+                      //     padding: EdgeInsets.only(left: 8.0),
+                      //     child: Text(
+                      //       "My Produce",
+                      //       textAlign: TextAlign.start,
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.bold, fontSize: 20),
+                      //     ),
+                      //   ),
+                      // ),
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
+                      // Stack(
+                      //   children: [
+                      //     Container(
+                      //       margin: const EdgeInsets.only(left: 10, top: 2),
+                      //       height: 100,
+                      //       width: double.infinity,
+                      //       color: Colors.red,
+                      //     ),
+                      //     Container(
+                      //       margin: const EdgeInsets.only(
+                      //           top: 30, left: 20, right: 20),
+                      //       height: 150,
+                      //       width: double.infinity,
+                      //       color: Colors.yellowAccent,
+                      //     ),
+                      //   ],
+                      // ),
+
+                      // ListView.builder(
+                      //     itemCount: myProducts.length,
+                      //     shrinkWrap: true,
+                      //     physics: const NeverScrollableScrollPhysics(),
+                      //     itemBuilder: (context, index) {
+                      //       return ProductCard(myProduct: myProducts[index]);
+                      //     }),
                     ],
                   ),
                 );

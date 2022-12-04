@@ -24,9 +24,6 @@ class WithdrawPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Withdraw"),
-      ),
       body: FutureBuilder(
           future: fetchWithdraws(),
           builder: (context, snapshot) {
@@ -44,56 +41,78 @@ class WithdrawPage extends StatelessWidget {
                     .map((item) => item.balance)
                     .reduce((sum, item) => sum + item);
 
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: size.height * 0.2,
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Countup(
-                                  begin: 0,
-                                  end: totalWithdraw.toDouble(),
-                                  duration: const Duration(seconds: 2),
-                                  separator: ',',
-                                  prefix: 'Birr ',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 24),
-                                ),
-                                const Text(
-                                  "Total Withdraw",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Color.fromRGBO(0, 0, 0, 0.5)),
-                                ),
-                              ],
+                return SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppBar(
+                        title: const Text(
+                          "Withdraw",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        elevation: 0,
+                        leading: IconButton(
+                          icon: const Icon(Icons.arrow_back_ios),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            height: size.height * 0.2,
+                            padding: const EdgeInsets.only(bottom: 40),
+                            decoration: const BoxDecoration(
+                              color: kPrimaryColor,
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15)),
+                            ),
+                            child: Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Countup(
+                                    begin: 0,
+                                    end: totalWithdraw.toDouble(),
+                                    duration: const Duration(seconds: 2),
+                                    separator: ',',
+                                    prefix: 'Birr ',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        color: Colors.white,
+                                        fontSize: 24),
+                                  ),
+                                  const Text(
+                                    "Total Withdraw",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color:
+                                            Color.fromRGBO(255, 255, 255, 0.8)),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        const Text(
-                          "Withdraws",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        ...withdraws
-                            .map((item) => WithdrawItemCart(
-                                  amount: item.balance,
-                                  date:
-                                      "${item.dateTime.day}/${item.dateTime.month}/${item.dateTime.year}",
-                                ))
-                            .toList(),
-                      ],
-                    ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: size.height * 0.2 - 60, left: 5, right: 5),
+                            child: ListView.builder(
+                                itemCount: withdraws.length,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) =>
+                                    WithdrawItemCart(
+                                      amount: withdraws[index].balance,
+                                      date:
+                                          "${withdraws[index].dateTime.day}/${withdraws[index].dateTime.month}/${withdraws[index].dateTime.year}",
+                                    )),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 );
               }

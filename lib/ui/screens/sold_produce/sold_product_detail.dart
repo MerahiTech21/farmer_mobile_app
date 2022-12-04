@@ -1,4 +1,5 @@
 import 'package:coldroom_product_management/models/sold_product.dart';
+import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:coldroom_product_management/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,16 @@ class SoldProductDetail extends StatelessWidget {
     final SoldProduct args =
         ModalRoute.of(context)!.settings.arguments as SoldProduct;
     return Scaffold(
-      appBar: AppBar(title: Text(args.productName.capitalize())),
+      appBar: AppBar(
+        title: Text(
+          args.productName.capitalize(),
+        ),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new_outlined)),
+      ),
       body: Column(
         children: [
           Container(
@@ -29,7 +39,7 @@ class SoldProductDetail extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            color: Colors.transparent,
+            color: kSecondaryColor,
             width: double.infinity,
             child: Row(
               children: [
@@ -44,20 +54,19 @@ class SoldProductDetail extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
             width: double.infinity,
-            color: Colors.white,
             child: Row(
               children: [
                 const Text("Sold amount:"),
                 const SizedBox(
                   width: 20,
                 ),
-                Text('${args.soldAmount}'),
+                Text('${args.soldAmount} KG'),
               ],
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            color: Colors.transparent,
+            color: kSecondaryColor,
             width: double.infinity,
             child: Row(
               children: [
@@ -79,13 +88,13 @@ class SoldProductDetail extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                Text('Birr ${args.rentCost}/Kg'),
+                Text('Birr ${args.rentCost}'),
               ],
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            color: Colors.transparent,
+            color: kSecondaryColor,
             width: double.infinity,
             child: Row(
               children: [
@@ -93,7 +102,7 @@ class SoldProductDetail extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                Text('Birr ${args.soldAmount * args.soldPrice}'),
+                Text('Birr ${args.netBalance}'),
               ],
             ),
           ),

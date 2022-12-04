@@ -5,14 +5,14 @@ class Product {
   String image;
   String name;
   double remainingQty;
-  int rentPrice;
+  DateTime createdAt;
   List<ProductType>? types = [];
   Product(
       {required this.image,
       required this.id,
       required this.name,
       required this.remainingQty,
-      required this.rentPrice,
+      required this.createdAt,
       this.types});
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -29,6 +29,6 @@ class Product {
         name: json["name"],
         // types: productTypes,
         remainingQty: json["remainingQuantity"].toDouble(),
-        rentPrice: json["rentPrice"]);
+        createdAt:DateTime.parse(json["createdAt"]) );
   }
 }

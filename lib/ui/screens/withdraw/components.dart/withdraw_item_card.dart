@@ -14,35 +14,19 @@ class WithdrawItemCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(25)),
-      child: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            const Icon(
-              FontAwesomeIcons.check,
-              size: 24,
-              color: kPrimaryColor,
-            ),
-            const Spacer(
-              flex: 1,
-            ),
-            Text("Birr $amount",
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-            const Spacer(
-              flex: 2,
-            ),
-            Text(date,
-                style: const TextStyle(
-                    fontSize: 14, color: Color.fromRGBO(0, 0, 0, 0.5))),
-            // Spacer(
-            //   flex: 2,
-            // ),
-          ]),
+    return Card(
+      child: ListTile(
+        leading: const Icon(
+          FontAwesomeIcons.check,
+          size: 24,
+          color: kPrimaryColor,
+        ),
+        trailing: Text(date,
+            style: const TextStyle(
+                fontSize: 14, color: Color.fromRGBO(0, 0, 0, 0.5))),
+        title: Text("Birr $amount",
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+      ),
     );
   }
 }

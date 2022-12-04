@@ -15,8 +15,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +22,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: kSecondaryColor,
+          scaffoldBackgroundColor: Colors.white,
           textTheme: const TextTheme(
             bodyText1: TextStyle(fontSize: 16),
             bodyText2: TextStyle(

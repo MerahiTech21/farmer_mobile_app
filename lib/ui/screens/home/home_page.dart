@@ -25,7 +25,15 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           leading: null,
-          title: const Text("Rensys Coldroom"),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: const Text(
+            "Rensys Coldroom",
+            style: TextStyle(
+                color: kPrimaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 24),
+          ),
         ),
         body: FutureBuilder(
             future: fetchSummary(),
@@ -104,7 +112,9 @@ class HomePage extends StatelessWidget {
               }
 
               return const Center(
-                child: CircularProgressIndicator(color: kPrimaryColor,),
+                child: CircularProgressIndicator(
+                  color: kPrimaryColor,
+                ),
               );
             })
 

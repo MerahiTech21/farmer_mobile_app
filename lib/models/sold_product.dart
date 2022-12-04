@@ -26,7 +26,7 @@ class SoldProduct {
         typeName: json['typeName'],
         image: json["image"],
         soldAmount: json['soldAmount'],
-        soldPrice: json['soldPrice'].toDouble(),
+        soldPrice: json['totalBalance'].toDouble(),
         rentCost: json['rentCost'],
         date: DateTime.parse(json['date']),
         netBalance: json['netBalance']);

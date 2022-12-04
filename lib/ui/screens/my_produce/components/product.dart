@@ -38,11 +38,11 @@ class ProductCard extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         subtitle: Text(
-          'Rent Birr ${myProduct.rentPrice}',
+          '${myProduct.remainingQty} Kg',
           style: TextStyle(fontSize: 14, color: Colors.black.withOpacity(0.5)),
         ),
         trailing: Text(
-          "${myProduct.remainingQty} Kg",
+          " ${myProduct.createdAt.day}/${myProduct.createdAt.month}/${myProduct.createdAt.year}",
           style: const TextStyle(fontSize: 14),
         ),
 

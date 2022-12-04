@@ -42,9 +42,17 @@ class _LoginState extends State<Login> {
 
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     } catch (e) {
-      _errorText = e.toString();
+      _errorText = e
+          .toString()
+          .split(':')
+          .sublist(1, 2)
+          .join(' ')
+          .toString()
+          .replaceAll('"', '');
     } finally {
-      _isLoading = false;
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -58,7 +66,7 @@ class _LoginState extends State<Login> {
           child: Column(
             children: [
               const Text(
-                "Welcome To Rensys Engineering Coldroom",
+                "Rensys Engineering Coldroom Farmers Dashboard",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24,

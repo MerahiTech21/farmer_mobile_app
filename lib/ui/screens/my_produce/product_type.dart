@@ -14,6 +14,11 @@ class ProductTypeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Types'),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
       body: FutureBuilder(
           future: fetchProductTypes(productId),
