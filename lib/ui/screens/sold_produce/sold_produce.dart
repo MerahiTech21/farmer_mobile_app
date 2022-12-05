@@ -4,7 +4,6 @@ import 'package:coldroom_product_management/ui/screens/sold_produce/sold_product
 import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
-
 import 'components/transactions_item_card.dart';
 
 class SoldProduce extends StatelessWidget {

@@ -5,76 +5,76 @@ import 'package:coldroom_product_management/ui/screens/home/home_page.dart';
 import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  static const String routeName = "/login";
-  const Login({Key? key}) : super(key: key);
+class ResetForgotPassword extends StatefulWidget {
+  static const String routeName = "/reset-forgot-password";
+  const ResetForgotPassword({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<ResetForgotPassword> createState() => _ResetForgotPasswordState();
 }
 
-class _LoginState extends State<Login> {
-  final TextEditingController _ctrlPhoneNo = TextEditingController();
+class _ResetForgotPasswordState extends State<ResetForgotPassword> {
   final TextEditingController _ctrlPassword = TextEditingController();
+  final TextEditingController _ctrlConfirmPassword = TextEditingController();
   bool _isPasswordShown = false;
+  bool _isConfirmPasswordShown = false;
   final _formKey = GlobalKey<FormState>();
 
   String _errorText = "";
   bool _isLoading = false;
 
-  togglePasswordHide() {
-    setState(() {
-      _isPasswordShown = !_isPasswordShown;
-    });
-  }
-
-  submitLoginForm() async {
+  submitResetForgotPasswordForm() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
         _errorText = "";
       });
-    }
-    try {
-      Map<String, dynamic> response =
-          await login(_ctrlPhoneNo.text, _ctrlPassword.text);
-      StorageManager.saveData("token", response['token']);
-      StorageManager.saveData("userId", response['id']);
 
-      Navigator.pushReplacementNamed(context, HomePage.routeName);
-    } catch (e) {
-      _errorText = e.toString();
-      // .split(':')
-      // .sublist(1, 2)
-      // .join(' ')
-      // .toString()
-      // .replaceAll('"', '');
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      try {
+        Map<String, dynamic> response =
+            await resetForgotPassword(password: _ctrlPassword.text);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            HomePage.routeName, (Route<dynamic> route) => false);
+        // Navigator.pushReplacementNamed(context, HomePage.routeName);
+      } catch (e) {
+        _errorText = e.toString();
+        // .split(':')
+        // .sublist(1, 2)
+        // .join(' ')
+        // .toString()
+        // .replaceAll('"', '');
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30, 100, 30, 0),
+          padding: const EdgeInsets.fromLTRB(30, 150, 30, 0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                'assets/images/rensys.png',
-                height: 150,
-              ),
-              const Text(
-                "Coldroom Farmers Dashboard",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "Set New Password",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(
-                height: 30,
+                height: 25,
               ),
               Form(
                 key: _formKey,
@@ -83,13 +83,14 @@ class _LoginState extends State<Login> {
                     TextFormField(
                       autofocus: false,
                       // style: const TextStyle(color: Colors.white),
-                      controller: _ctrlPhoneNo,
-                      keyboardType: TextInputType.number,
+                      controller: _ctrlPassword,
+                      obscureText: !_isPasswordShown,
                       textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Enter phone number';
+                          return 'Enter password';
                         }
+                        
                         return null;
                       },
                       decoration: InputDecoration(
@@ -113,9 +114,19 @@ class _LoginState extends State<Login> {
                             width: 1.0,
                           ),
                         ),
+                        suffixIcon: IconButton(
+                            color: Colors.grey,
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordShown = !_isPasswordShown;
+                              });
+                            },
+                            icon: _isPasswordShown
+                                ? const Icon(Icons.visibility)
+                                : const Icon(Icons.visibility_off)),
                         contentPadding:
                             const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        hintText: "Enter Phone No",
+                        hintText: "New Password",
                         hintStyle: TextStyle(color: Colors.grey[400]),
                       ),
                     ),
@@ -124,51 +135,58 @@ class _LoginState extends State<Login> {
                     ),
                     TextFormField(
                       autofocus: false,
-                      obscureText: !_isPasswordShown,
+                      obscureText: !_isConfirmPasswordShown,
                       // style: const TextStyle(color: Colors.black),
-                      controller: _ctrlPassword,
+                      controller: _ctrlConfirmPassword,
                       // keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Enter password';
+                          return 'Enter Password';
+                        }
+                        if (value != _ctrlPassword.text) {
+                          return "Password don't match";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                            borderSide: const BorderSide(
-                              color: Colors.grey,
-                              width: 1.0,
-                            ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                            width: 1.0,
                           ),
-                          iconColor: Colors.grey,
-                          focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              borderSide: const BorderSide(color: Colors.red)),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              borderSide: const BorderSide(color: Colors.red)),
-                          focusedBorder: OutlineInputBorder(
+                        ),
+                        suffixIcon: IconButton(
+                            color: Colors.grey,
+                            onPressed: () {
+                              setState(() {
+                                _isConfirmPasswordShown =
+                                    !_isConfirmPasswordShown;
+                              });
+                            },
+                            icon: _isConfirmPasswordShown
+                                ? const Icon(Icons.visibility)
+                                : const Icon(Icons.visibility_off)),
+                        iconColor: Colors.grey,
+                        focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
-                            borderSide: const BorderSide(
-                              color: Colors.grey,
-                              width: 1.0,
-                            ),
+                            borderSide: const BorderSide(color: Colors.red)),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                            borderSide: const BorderSide(color: Colors.red)),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                            width: 1.0,
                           ),
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                          hintText: "Enter Passsword",
-                          hintStyle: TextStyle(color: Colors.grey[400]),
-                          suffixIcon: IconButton(
-                              color: Colors.grey,
-                              onPressed: () {
-                                togglePasswordHide();
-                              },
-                              icon: _isPasswordShown
-                                  ? const Icon(Icons.visibility)
-                                  : const Icon(Icons.visibility_off))),
+                        ),
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        hintText: "Confirm Passsword",
+                        hintStyle: TextStyle(color: Colors.grey[400]),
+                      ),
                     ),
                   ],
                 ),
@@ -178,7 +196,7 @@ class _LoginState extends State<Login> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  submitLoginForm();
+                  submitResetForgotPasswordForm();
                 },
                 style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,
@@ -212,7 +230,7 @@ class _LoginState extends State<Login> {
                               ),
                             ))
                           : const Text(
-                              "Log-in",
+                              "Change Password",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 15,
@@ -220,19 +238,6 @@ class _LoginState extends State<Login> {
                                   fontWeight: FontWeight.bold),
                             )),
                 ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, ForgotPassword.routeName);
-                    },
-                    child: const Text(
-                      'Forgot password?',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          color: Colors.red, fontWeight: FontWeight.bold),
-                    )),
               ),
               Text(
                 _errorText,

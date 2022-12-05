@@ -26,26 +26,42 @@ Future logout() async {
   await apiBaseHelper.get(url: '/farmer/auth/logout');
 }
 
-// Future changePhoneNo(phoneNumber) async {
-//   var id = await StorageManager.readData("userId");
-//   var token = await StorageManager.readData("token");
- 
-//   final response = await apiBaseHelper.post(
-//       url: '/farmer/farmerProfile/phoneNumber/${id}',
-//       payload: {phoneNumber},
-//       token: token);
+Future forgotPassword(phoneNumber) async {
+  final response = await apiBaseHelper.get(
+    url: '/farmer/farmers/forgotPassword/$phoneNumber',
+  );
 
-//   return response;
-// }
+  return response;
+}
+
+Future verifyToken(phoneNumber, token) async {
+  final response = await apiBaseHelper.post(
+    url: '/farmer/farmers/verifyToken/$phoneNumber',
+    payload: {"tokenCode":token}
+  );
+  return response;
+}
 
 Future changePassword({oldPassword, newPassword}) async {
   var id = await StorageManager.readData("userId");
   var token = await StorageManager.readData("token");
- 
+      
   final response = await apiBaseHelper.put(
       url: '/farmer/farmerProfile/password/${id}',
-      payload: {"oldPassword":oldPassword, 'newPassword':newPassword},
+      payload: {"oldPassword": oldPassword, 'newPassword': newPassword},
       token: token);
 
-   return response;
+  return response;
+}
+
+Future resetForgotPassword({password}) async {
+  var id = await StorageManager.readData("userId");
+  var token = await StorageManager.readData("token");
+
+  final response = await apiBaseHelper.post(
+      url: '/farmer/farmers/resetPassword/$id',
+      payload: {"newPassword": password},
+      token: token);
+
+  return response;
 }

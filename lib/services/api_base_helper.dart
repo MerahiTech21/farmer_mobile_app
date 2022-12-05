@@ -5,6 +5,7 @@ import 'api_exception.dart';
 
 class ApiBaseHelper {
   final String _baseUrl = "http://192.168.0.9:3000";
+  // final String _baseUrl = "http://coldroomapinew.merahitechnologies.com";
   Future<dynamic> get({required String url, token}) async {
     final responseJson;
     try {
@@ -20,7 +21,6 @@ class ApiBaseHelper {
     } on SocketException {
       throw FetchDataException(message: 'No Internet connection');
     }
-    // print('api get recieved!');
     return responseJson;
   }
 

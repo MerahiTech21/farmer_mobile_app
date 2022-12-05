@@ -17,7 +17,7 @@ class ProductType {
         image: json["image"],
         name: json["name"],
         remainQty: json["remainingQuantity"],
-        soldQty: 8,
+        soldQty: json["soldQuantity"],
         addedDate: DateTime.now());
   }
 }

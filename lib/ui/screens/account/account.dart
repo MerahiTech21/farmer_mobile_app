@@ -1,4 +1,5 @@
 import 'package:coldroom_product_management/controller/auth.dart';
+import 'package:coldroom_product_management/services/storage_management.dart';
 import 'package:coldroom_product_management/ui/screens/login/login.dart';
 import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:coldroom_product_management/utils/string_extensions.dart';
@@ -124,6 +125,9 @@ class _AccountState extends State<Account> {
   }
 
   logoutUser() async {
+    await StorageManager.deleteData('token');
+    await StorageManager.deleteData(('userId'));
+
     Navigator.of(context).pushNamedAndRemoveUntil(
         Login.routeName, (Route<dynamic> route) => false);
     await logout();
