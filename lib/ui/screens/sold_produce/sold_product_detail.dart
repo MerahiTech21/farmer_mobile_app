@@ -98,7 +98,7 @@ class SoldProductDetail extends StatelessWidget {
             width: double.infinity,
             child: Row(
               children: [
-                const Text("Total:"),
+                const Text("Net:"),
                 const SizedBox(
                   width: 20,
                 ),

@@ -6,7 +6,7 @@ class SummaryComponent extends StatefulWidget {
   int balance;
   int productInStore;
 
-   SummaryComponent({
+  SummaryComponent({
     required this.balance,
     required this.productInStore,
     Key? key,
@@ -51,7 +51,7 @@ class _SummaryState extends State<SummaryComponent> {
                 flex: 2,
               ),
               isBalanceVisible
-                  ?  Text(
+                  ? Text(
                       "Birr ${widget.balance}",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -95,7 +95,7 @@ class _SummaryState extends State<SummaryComponent> {
                 flex: 2,
               ),
               isProductInStoreVisible
-                  ?  Text(
+                  ? Text(
                       "${widget.productInStore} KG",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
