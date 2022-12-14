@@ -28,12 +28,23 @@ class HomePage extends StatelessWidget {
           leading: null,
           backgroundColor: Colors.white,
           elevation: 0,
-          title: const Text(
-            "Rensys Coldroom",
-            style: TextStyle(
-                color: kPrimaryColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 24),
+          title: Row(
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.transparent,
+                child: Image.asset(
+                  'assets/images/rensys.png',
+                ),
+              ),
+              const Text(
+                "Rensys Coldroom",
+                style: TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24),
+              ),
+            ],
           ),
         ),
         body: FutureBuilder(
