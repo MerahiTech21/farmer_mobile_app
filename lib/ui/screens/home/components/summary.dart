@@ -41,7 +41,6 @@ class _SummaryState extends State<SummaryComponent> {
           decoration: BoxDecoration(
               color: kSecondaryColor, borderRadius: BorderRadius.circular(10)),
           child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
                 "Balance",
@@ -61,9 +60,11 @@ class _SummaryState extends State<SummaryComponent> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-              const Spacer(
-                flex: 1,
+            
+              SizedBox(
+                width: 20,
               ),
+
               IconButton(
                   onPressed: () {
                     toggleBalanceVisiblity();
@@ -85,7 +86,6 @@ class _SummaryState extends State<SummaryComponent> {
           decoration: BoxDecoration(
               color: kSecondaryColor, borderRadius: BorderRadius.circular(10)),
           child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
                 "Product In Store",
@@ -105,8 +105,8 @@ class _SummaryState extends State<SummaryComponent> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-              const Spacer(
-                flex: 1,
+              SizedBox(
+                width: 20,
               ),
               IconButton(
                   onPressed: () {

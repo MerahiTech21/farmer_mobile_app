@@ -20,10 +20,6 @@ class ProductCard extends StatelessWidget {
           Navigator.pushNamed(context, ProductTypeScreen.routeName,
               arguments: myProduct.id);
         },
-        // backgroundColor: kSecondaryColor,
-        // collapsedBackgroundColor: kSecondaryColor,
-        // backgroundColor: Colors.white,
-        // collapsedTextColor: Colors.black,
         textColor: Colors.black,
 
         leading: ClipRRect(
@@ -45,45 +41,6 @@ class ProductCard extends StatelessWidget {
           " ${myProduct.createdAt.day}/${myProduct.createdAt.month}/${myProduct.createdAt.year}",
           style: const TextStyle(fontSize: 14),
         ),
-
-        // expandedCrossAxisAlignment: CrossAxisAlignment.start,
-        // children: <Widget>[
-        //   const Padding(
-        //     padding: EdgeInsets.only(right: 50),
-        //     child: Divider(
-        //       color: kPrimaryColor,
-        //       thickness: 2,
-        //     ),
-        //   ),
-        //   const Padding(
-        //     padding: EdgeInsets.only(top: 8.0, bottom: 8, left: 20),
-        //     child: Text(
-        //       'Produce types remain in the store',
-        //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        //     ),
-        //   ),
-        //   ProduceTypeCard(
-        //     image: "assets/images/download_5.jpg",
-        //     name: "Tomato",
-        //     remainQty: 200,
-        //     soldQty: 200,
-        //     addedDate: DateTime.now(),
-        //   ),
-        //   ProduceTypeCard(
-        //     image: "assets/images/download_5.jpg",
-        //     name: "Tomato",
-        //     remainQty: 200,
-        //     soldQty: 200,
-        //     addedDate: DateTime.now(),
-        //   ),
-        //   ProduceTypeCard(
-        //     image: "assets/images/download_5.jpg",
-        //     name: "Tomato",
-        //     remainQty: 200,
-        //     soldQty: 200,
-        //     addedDate: DateTime.now(),
-        //   ),
-        // ],
       ),
     );
   }

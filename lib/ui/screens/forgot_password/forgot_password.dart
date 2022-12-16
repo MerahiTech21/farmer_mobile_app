@@ -31,11 +31,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             arguments: _ctrlPhoneNo.text);
       } catch (e) {
         _errorText = e.toString();
-        // .split(':')
-        // .sublist(1, 2)
-        // .join(' ')
-        // .toString()
-        // .replaceAll('"', '');
       } finally {
         setState(() {
           _isLoading = false;

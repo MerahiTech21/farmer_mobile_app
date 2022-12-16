@@ -44,11 +44,6 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     } catch (e) {
       _errorText = e.toString();
-      // .split(':')
-      // .sublist(1, 2)
-      // .join(' ')
-      // .toString()
-      // .replaceAll('"', '');
     } finally {
       setState(() {
         _isLoading = false;
@@ -69,12 +64,18 @@ class _LoginState extends State<Login> {
                 'assets/images/rensys.png',
                 height: 150,
               ),
-              const Text(
-                "Coldroom Farmers Dashboard",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  "Coldroom Farmers Dashboard",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Form(
                 key: _formKey,
@@ -82,7 +83,6 @@ class _LoginState extends State<Login> {
                   children: [
                     TextFormField(
                       autofocus: false,
-                      // style: const TextStyle(color: Colors.white),
                       controller: _ctrlPhoneNo,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
@@ -125,9 +125,7 @@ class _LoginState extends State<Login> {
                     TextFormField(
                       autofocus: false,
                       obscureText: !_isPasswordShown,
-                      // style: const TextStyle(color: Colors.black),
                       controller: _ctrlPassword,
-                      // keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value == null || value.isEmpty) {

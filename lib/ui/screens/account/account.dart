@@ -4,7 +4,6 @@ import 'package:coldroom_product_management/ui/screens/login/login.dart';
 import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:coldroom_product_management/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Account extends StatefulWidget {
   static const String routeName = '/account';
@@ -15,7 +14,6 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
-  final TextEditingController _phoneNoCtrl = TextEditingController();
   final TextEditingController _oldPassword = TextEditingController();
   final TextEditingController _newPassword = TextEditingController();
 
@@ -34,37 +32,6 @@ class _AccountState extends State<Account> {
     super.initState();
     _getUserData();
   }
-
-  // void _changePhoneNo() async {
-  //   try {
-  //     var res = await changePhoneNo(_phoneNoCtrl.text);
-  //     setState(() {
-  //       _isPhoneNoChanging = true;
-  //       phoneNo = res;
-  //     });
-  //     const snackBar = SnackBar(
-  //       backgroundColor: Colors.white,
-  //       content: Text(
-  //         'Your Phone Number is changed.',
-  //         style: TextStyle(color: Colors.red),
-  //       ),
-  //     );
-  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //   } catch (e) {
-  //     const snackBar = SnackBar(
-  //       backgroundColor: Colors.white,
-  //       content: Text('Faild to change Phone Number.',
-  //           style: TextStyle(color: Colors.red)),
-  //     );
-  //     _phoneNoCtrl.text = '';
-  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //   } finally {
-  //     setState(() {
-  //       _isPhoneNoChanging = false;
-  //     });
-  //     Navigator.pop(context);
-  //   }
-  // }
 
   void _changePassword() async {
     try {
@@ -134,13 +101,10 @@ class _AccountState extends State<Account> {
   }
 
   _showChangePasswordDialog() {
-    // _phoneNo.text = auth.firstName;
-    // _lastNameCtrl.text = auth.lastName;
-
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => Dialog(
-        insetPadding: const EdgeInsets.all(kDefaultPadding * 0.5),
+        insetPadding: const EdgeInsets.all(10),
         child: Container(
           width: double.infinity,
           height: 270,
@@ -239,89 +203,6 @@ class _AccountState extends State<Account> {
       ),
     );
   }
-
-  // _showPhoneNoDialog() {
-  //   showDialog<String>(
-  //     context: context,
-  //     builder: (BuildContext context) => Dialog(
-  //       insetPadding: const EdgeInsets.all(kDefaultPadding * 0.5),
-  //       child: Container(
-  //         width: double.infinity,
-  //         height: 200,
-  //         decoration: BoxDecoration(
-  //           // color: isDark ? kDarkBlueColor : Colors.white,
-  //           borderRadius: BorderRadius.circular(15),
-  //         ),
-  //         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-  //         child: Column(
-  //           children: [
-  //             Form(
-  //                 key: _formKey,
-  //                 child: Column(
-  //                   crossAxisAlignment: CrossAxisAlignment.start,
-  //                   children: [
-  //                     const SizedBox(
-  //                       height: 10,
-  //                     ),
-  //                     const Text('New Phone No'),
-  //                     const SizedBox(
-  //                       height: 5,
-  //                     ),
-  //                     TextFormField(
-  //                       controller: _phoneNoCtrl,
-  //                       style: const TextStyle(fontSize: 16),
-  //                       decoration: InputDecoration(
-  //                           hintText: phoneNo ?? '',
-  //                           contentPadding: const EdgeInsets.symmetric(
-  //                               horizontal: 16, vertical: 0),
-  //                           border: OutlineInputBorder(
-  //                               borderRadius: BorderRadius.circular(25))),
-  //                       validator: (value) {
-  //                         if (value == null || value.isEmpty) {
-  //                           return 'Phone is required';
-  //                         } else if (value.length > 10) {
-  //                           return "Shouldn't be greater than 10";
-  //                         }
-  //                         return null;
-  //                       },
-  //                     ),
-  //                     const SizedBox(
-  //                       height: 20,
-  //                     ),
-  //                     Row(
-  //                       mainAxisAlignment: MainAxisAlignment.end,
-  //                       children: [
-  //                         TextButton(
-  //                           child: const Text(
-  //                             "Cancel",
-  //                             style: TextStyle(color: Colors.black),
-  //                           ),
-  //                           onPressed: () {
-  //                             Navigator.pop(context);
-  //                           },
-  //                         ),
-  //                         ElevatedButton(
-  //                           onPressed: () {
-  //                             _changePhoneNo();
-  //                           },
-  //                           child: _isPhoneNoChanging
-  //                               ? const CircularProgressIndicator()
-  //                               : const Text("Change"),
-  //                           style: ElevatedButton.styleFrom(
-  //                               primary: kPrimaryColor,
-  //                               shape: RoundedRectangleBorder(
-  //                                   borderRadius: BorderRadius.circular(25))),
-  //                         )
-  //                       ],
-  //                     )
-  //                   ],
-  //                 ))
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Future<void> _showAboutDialog() async {
     return showDialog<void>(

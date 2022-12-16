@@ -38,11 +38,6 @@ class _ResetForgotPasswordState extends State<ResetForgotPassword> {
         // Navigator.pushReplacementNamed(context, HomePage.routeName);
       } catch (e) {
         _errorText = e.toString();
-        // .split(':')
-        // .sublist(1, 2)
-        // .join(' ')
-        // .toString()
-        // .replaceAll('"', '');
       } finally {
         setState(() {
           _isLoading = false;

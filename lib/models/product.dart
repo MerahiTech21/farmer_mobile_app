@@ -16,13 +16,6 @@ class Product {
       this.types});
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    // List<ProductType> productTypes = [];
-
-    // List types = json['types'] as List;
-    // for (int i = 0; i < types.length; i++) {
-    //   Map<String, dynamic> map = json[i];
-    //   productTypes.add(ProductType.fromJson(map));
-    // }
     return Product(
         image: json["image"],
         id: json['id'],

@@ -1,8 +1,4 @@
-import 'package:coldroom_product_management/services/storage_management.dart';
 import 'package:coldroom_product_management/splashscreen.dart';
-import 'package:coldroom_product_management/ui/screens/account/account.dart';
-import 'package:coldroom_product_management/ui/screens/home/home_page.dart';
-import 'package:coldroom_product_management/ui/screens/login/login.dart';
 import 'package:coldroom_product_management/utils/constants.dart';
 import 'package:coldroom_product_management/utils/routers.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Coldroom management',
+        title: 'Rensys Coldroom',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,

@@ -9,17 +9,6 @@ class WithdrawPage extends StatelessWidget {
   static const String routeName = "/withdraw";
   const WithdrawPage({Key? key}) : super(key: key);
 
-// FutureBuilder(
-//             future: fetchSummary(),
-//             builder: (context, snapshot) {
-//               if (snapshot.connectionState == ConnectionState.done) {
-//                 if (snapshot.hasError) {
-//                   return const Center(
-//                     child: Text('Faild to load data'),
-//                   );
-//                 } else if (snapshot.hasData) {
-//                   Summary summary = snapshot.data as Summary;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

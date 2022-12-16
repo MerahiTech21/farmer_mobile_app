@@ -13,14 +13,14 @@ class FetchDataException extends AppException {
 }
 
 class BadRequestException extends AppException {
-  BadRequestException([message]) : super(message, "Invalid Request");
+  BadRequestException([message]) : super(message,' ');
 }
 
 class UnauthorisedException extends AppException {
-  UnauthorisedException([message]) : super(message, "Unauthorised ");
+  UnauthorisedException([message]) : super(message,' ');
 }
 
 class InvalidInputException extends AppException {
   InvalidInputException({required String message})
-      : super(message, "Invalid Input: ");
+      : super(message,' ');
 }

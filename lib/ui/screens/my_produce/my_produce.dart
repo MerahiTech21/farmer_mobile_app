@@ -29,7 +29,6 @@ class MyProduce extends StatelessWidget {
                 return SingleChildScrollView(
                   physics: const ScrollPhysics(),
                   child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppBar(
                         leading: IconButton(
@@ -99,47 +98,7 @@ class MyProduce extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // const Align(
-                      //   alignment: Alignment.topLeft,
-                      //   child: Padding(
-                      //     padding: EdgeInsets.only(left: 8.0),
-                      //     child: Text(
-                      //       "My Produce",
-                      //       textAlign: TextAlign.start,
-                      //       style: TextStyle(
-                      //           fontWeight: FontWeight.bold, fontSize: 20),
-                      //     ),
-                      //   ),
-                      // ),
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
-                      // Stack(
-                      //   children: [
-                      //     Container(
-                      //       margin: const EdgeInsets.only(left: 10, top: 2),
-                      //       height: 100,
-                      //       width: double.infinity,
-                      //       color: Colors.red,
-                      //     ),
-                      //     Container(
-                      //       margin: const EdgeInsets.only(
-                      //           top: 30, left: 20, right: 20),
-                      //       height: 150,
-                      //       width: double.infinity,
-                      //       color: Colors.yellowAccent,
-                      //     ),
-                      //   ],
-                      // ),
-
-                      // ListView.builder(
-                      //     itemCount: myProducts.length,
-                      //     shrinkWrap: true,
-                      //     physics: const NeverScrollableScrollPhysics(),
-                      //     itemBuilder: (context, index) {
-                      //       return ProductCard(myProduct: myProducts[index]);
-                      //     }),
-                    ],
+                                        ],
                   ),
                 );
               }
@@ -147,44 +106,7 @@ class MyProduce extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(color: kPrimaryColor),
             );
-          })
-      // ListView.builder(
-      //     itemCount: 6,
-      //     itemBuilder: (context, index) {
-      //       return SkeletonAnimation(
-      //         child: Card(
-      //           child: ListTile(
-      //             leading: Container(
-      //               height: 40,
-      //               width: size.width * 0.15,
-      //               decoration: BoxDecoration(
-      //                   borderRadius: BorderRadius.circular(5.0),
-      //                   color: Colors.grey[300]),
-      //             ),
-      //             title: Container(
-      //               width: 50,
-      //               height: 10,
-      //               decoration: BoxDecoration(
-      //                   borderRadius: BorderRadius.circular(5.0),
-      //                   color: Colors.grey[300]),
-      //             ),
-      //             trailing: Container(
-      //               width: 20,
-      //               height: 10,
-      //             ),
-      //             subtitle: Container(
-      //               // width: size.width * 0.12,
-      //               // height: 5,
-      //               decoration: BoxDecoration(
-      //                   borderRadius: BorderRadius.circular(5.0),
-      //                   color: Colors.grey[300]),
-      //             ),
-      //           ),
-      //         ),
-      //       );
-      //     })
-
-      ,
+          }),
     );
   }
 }

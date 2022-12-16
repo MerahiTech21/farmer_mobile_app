@@ -89,12 +89,6 @@ class SoldProduce extends StatelessWidget {
                                   ),
                                 ),
 
-                                // const Text(
-                                //   "Transactions",
-                                //   style: TextStyle(
-                                //       fontWeight: FontWeight.bold,
-                                //       fontSize: 20),
-                                // ),
                                 Padding(
                                   padding: EdgeInsets.only(
                                       top: size.height * 0.2 - 60,

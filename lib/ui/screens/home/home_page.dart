@@ -153,7 +153,6 @@ class HomePage extends StatelessWidget {
                         flex: 2,
                       ),
                       SizedBox(
-                          // color: kSecondaryColor,
                           height: size.width,
                           child: Center(
                               child: GridView.extent(

@@ -21,7 +21,7 @@ class _VerifyTokenState extends State<VerifyToken> {
   String _tokenCode = '';
   bool _isTokenRenseding = false;
   final _formKey = GlobalKey<FormState>();
-  // OtpFieldController otpController = OtpFieldController();
+
   var _phoneNumber;
   _submitForm() async {
     if (_tokenCode == '') {

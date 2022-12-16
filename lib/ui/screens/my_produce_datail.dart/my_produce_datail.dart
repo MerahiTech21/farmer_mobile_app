@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'components/produce_detail_card.dart';
 
 class MyProduce extends StatelessWidget {
